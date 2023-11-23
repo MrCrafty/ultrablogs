@@ -1,16 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../supabase";
 import { PiUserCircleLight } from "react-icons/pi";
 import { FiLoader } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { Metadata } from "next";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export const metadata: Metadata = {
     title: "Register"
 }
 
 const Register = () => {
+    const supabase = createClientComponentClient();
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");

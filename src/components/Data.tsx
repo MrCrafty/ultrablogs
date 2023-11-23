@@ -10,22 +10,24 @@ const Data = () => {
         getData();
     }, [])
     const getData = async () => {
-        // await supabase.from("data").select().then(data => setData(data?.data));
+        await supabase.from("data").select().then(data => setData(data?.data));
         const data = await supabase.auth.getSession();
-        // console.log(data);
+        console.log(data);
 
     }
     const addData = async () => {
-        const id = await supabase.auth.getSession();
-        await supabase.from("data").insert({ data: markdown, title: "Blog", user_id: id.data.session?.user?.id });
+        const session = await supabase.auth.getSession();
+        if (session.data?.session != null) {
+            const data = await supabase.from("data").insert({ data: markdown, title: "Blog", user_id: session.data.session?.user?.id });
+            data.error ? alert(data.error.message) : console.log(data.data)
+        } else {
+            alert("Please Login To add Data")
+        }
     }
 
     return (
         <div>
-            <button onClick={() => { addData() }} className='bg-blue-500 px-4 py-1 rounded-lg'>Click</button>
-            <button onClick={async () => {
-                const { error } = await supabase.auth.signOut();
-            }} className='bg-blue-500 px-4 py-1 rounded-lg'>Logout</button>
+            <button onClick={() => { addData() }} className='bg-blue-500 px-4 py-1 rounded-lg'>Add Data</button>
         </div>
     )
 }
