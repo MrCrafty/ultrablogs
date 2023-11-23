@@ -1,9 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { isLogin, supabase } from "../../supabase";
+import { supabase } from "../../supabase";
 import { PiUserCircleLight } from "react-icons/pi";
 import { FiLoader } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Register"
+}
 
 const Register = () => {
     const [email, setemail] = useState("");
@@ -12,9 +17,12 @@ const Register = () => {
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter();
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        // e.preventDefault();
-        const login = await supabase.auth.signUp({ email: email, password: password })
-        login.error ? () => { (alert(login.error.message)); setSubmitting(false); } : router.push("/");
+        e.preventDefault();
+        setSubmitting(true);
+        const login = await supabase.auth.signUp({ email: email, password: password });
+        const handleError = () => { setSubmitting(false); (alert(login?.error?.message)); }
+        const handleRegister = () => { alert("Successfully Registered"); router.push("/") }
+        login.error ? handleError() : handleRegister();
         // await supabase.auth..then((data) => {
         //     console.log(data.data)
         //     router.push("/");
@@ -30,7 +38,7 @@ const Register = () => {
                     <input onChange={(e) => { setemail(e.target.value) }} className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black" type="email" name="email" placeholder="Enter email" autoComplete="email" />
                     <input onChange={(e) => { setpassword(e.target.value) }} className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black" type="password" name="password" autoComplete="current-password" placeholder="Enter password" />
                     <input onChange={(e) => { setConfirmPassword(e.target.value) }} className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black" type="password" name="password" autoComplete="confirm-password" placeholder="Confirm password" />
-                    <button type="submit" onClick={() => { setSubmitting(true) }} disabled={password == confirmPassword && password != "" && !submitting ? false : true} className="hover: w-1/2 mx-auto border-[1px] border-blue-500 py-2 rounded-md hover:bg-blue-500 transition-all disabled:bg-gray-500 disabled:border-none text-black disabled:text-white relative">{submitting ? <FiLoader className="text-center w-full" /> : "Submit"
+                    <button type="submit" disabled={password == confirmPassword && password != "" && !submitting ? false : true} className="hover: w-1/2 mx-auto border-[1px] border-blue-500 py-2 rounded-md hover:bg-blue-500 transition-all disabled:bg-gray-500 disabled:border-none text-black disabled:text-white relative">{submitting ? <FiLoader className="text-center w-full" /> : "Submit"
                     }</button>
                 </form>
             </div>

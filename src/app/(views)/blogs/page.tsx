@@ -1,25 +1,21 @@
-import Login from '@/components/Login'
 import React from 'react'
-import { Metadata } from 'next';
+import BlogList from './BlogList'
+import { cookies } from 'next/headers'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-    title: "Login",
-    description: "Login page"
-}
-
-const page = async () => {
+const Blogs = async () => {
     const cookieStore = cookies()
     const supabase = createServerComponentClient({ cookies: () => cookieStore })
     const { data: { session } } = await supabase.auth.getSession();
-    if (session != null) {
+    if (session == null) {
         return redirect("/")
     } else {
         return (
-            <Login />
+            <div><BlogList /></div>
         )
     }
+
 }
-export default page
+
+export default Blogs
