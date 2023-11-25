@@ -9,20 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/core": "^0.9.6",
+    "@blocknote/react": "^0.9.6",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.38.4",
+    "markdown-air": "^0.0.4",
     "md-2-json": "^2.0.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-    "showdown": "^2.1.0",
+    "react-markdown": "^9.0.1",
+    "react-tagsinput": "^3.20.3",
     "supabase": "^1.112.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-tagsinput": "^3.20.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
