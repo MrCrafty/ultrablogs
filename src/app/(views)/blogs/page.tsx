@@ -3,6 +3,7 @@ import BlogList from './BlogList'
 import { cookies } from 'next/headers'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { redirect } from 'next/navigation';
+import "@blocknote/core/style.css";
 
 const Blogs = async () => {
     const cookieStore = cookies()
@@ -12,7 +13,9 @@ const Blogs = async () => {
         return redirect("/")
     } else {
         return (
-            <div><BlogList /></div>
+            <div className='container'>
+                <div><BlogList /></div>
+            </div>
         )
     }
 

@@ -12,6 +12,7 @@
     "@blocknote/core": "^0.9.6",
     "@blocknote/react": "^0.9.6",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/postgrest-js": "^1.9.0",
     "@supabase/supabase-js": "^2.38.4",
     "markdown-air": "^0.0.4",
     "md-2-json": "^2.0.0",
