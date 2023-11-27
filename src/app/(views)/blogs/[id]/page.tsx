@@ -17,7 +17,9 @@ const page = async ({ params }: { params: { id: string } }) => {
     const data = await getData(params.id);
     console.log(data[0]);
     return (
-        <div className='text-black'><BlogItem data={data[0]} /></div>
+        <div className='text-black'>
+            {/* <BlogItem data={data[0]} /> */}
+        </div>
     )
 }
 
