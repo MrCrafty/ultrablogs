@@ -22,12 +22,8 @@ const Register = () => {
         setSubmitting(true);
         const login = await supabase.auth.signUp({ email: email, password: password });
         const handleError = () => { setSubmitting(false); (alert(login?.error?.message)); }
-        const handleRegister = () => { alert("Successfully Registered"); router.push("/") }
+        const handleRegister = () => { alert("Successfully Registered"); router.push("/"); router.refresh(); }
         login.error ? handleError() : handleRegister();
-        // await supabase.auth..then((data) => {
-        //     console.log(data.data)
-        //     router.push("/");
-        // }).catch((err) => { console.log(err.data) })
     }
 
     return (

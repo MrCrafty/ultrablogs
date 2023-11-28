@@ -8,13 +8,16 @@ import { BlockNoteView, lightDefaultTheme, useBlockNote } from "@blocknote/react
 import "@blocknote/core/style.css";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Block } from "@blocknote/core";
+import { useRouter } from "next/navigation";
 
 const AddBlogForm = () => {
+    const router = useRouter();
     const supabase = createClientComponentClient();
+    const handleFormSuccess = () => { alert("Saved Successfully"); router.push("/blogs") }
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await supabase.from("data").insert({ title: title, categories: tags.tags, data: blog, user_id: (await supabase.auth.getSession()).data.session?.user.id })
-        res.error ? alert(res.error.message) : console.log(res.data);
+        res.error ? alert(res.error.message) : handleFormSuccess();
     }
     const [title, setTitle] = useState("");
     const [tags, setTags] = useState({ tags: [] });
