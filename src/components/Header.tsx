@@ -11,15 +11,17 @@ const Header = async () => {
     const { data: { session } } = await supabase.auth.getSession();
 
     return (
-        <div className='py-4 container mx-auto'>
-            <ul className='flex justify-between'>
-                <ul className='flex gap-3'>
-                    <li><Link className='cursor-pointer' href="/">Home</Link></li>
-                    <li><Link className='cursor-pointer' href="/blogs">Blogs</Link></li>
+        <div className='border-b-2 border-gray-300 shadow-xl'>
+            <div className='py-4 container mx-auto'>
+                <ul className='flex justify-between'>
+                    <ul className='flex gap-3'>
+                        <li><Link className='cursor-pointer' href="/">Home</Link></li>
+                        <li><Link className='cursor-pointer' href="/blogs">Blogs</Link></li>
+                    </ul>
+                    <AuthButtons session={session} />
                 </ul>
-                <AuthButtons session={session} />
-            </ul>
-        </div >
+            </div >
+        </div>
     )
 }
 

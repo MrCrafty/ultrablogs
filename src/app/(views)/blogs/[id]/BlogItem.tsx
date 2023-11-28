@@ -1,9 +1,8 @@
 'use client'
 import { BlockNoteEditor } from '@blocknote/core';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BlockNoteView } from '@blocknote/react';
 import "@blocknote/core/style.css"
-import { cookies } from 'next/headers';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
@@ -23,7 +22,6 @@ const BlogItem = (data: any) => {
             seteditable(false);
         })
     }
-
     return (
         <div>
             <div className='border-b-2 py-2'>
