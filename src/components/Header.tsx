@@ -15,7 +15,7 @@ const Header = async () => {
             <ul className='flex justify-between'>
                 <ul className='flex gap-3'>
                     <li><Link className='cursor-pointer' href="/">Home</Link></li>
-                    <li><Link className='cursor-pointer' href="/about">About</Link></li>
+                    <li><Link className='cursor-pointer' href="/blogs">Blogs</Link></li>
                 </ul>
                 <AuthButtons session={session} />
             </ul>
