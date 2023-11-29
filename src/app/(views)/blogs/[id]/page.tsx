@@ -2,14 +2,12 @@ import React from 'react'
 import BlogItem from './BlogItem';
 import { createServerClient } from '@/lib/db';
 import { Metadata } from 'next';
-import { VscArrowLeft } from "react-icons/vsc";
-import Link from 'next/link';
 
 const metadata: Metadata = {
     title: `Blog Page`,
     description: "Blog Page"
 }
-export const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({ params }: { params: { id: string } }) => {
     const user = (await createServerClient().auth.getSession()).data.session?.user.id;
     async function getData(id: string) {
         const res = await createServerClient().from("data").select().eq("id", id).limit(1).single();
@@ -22,19 +20,11 @@ export const page = async ({ params }: { params: { id: string } }) => {
     const data = await getData(params.id);
     return (
         <div className='text-black container'>
-            <div className='w-1/2 mx-auto'>
-                <div className='my-10 inline-block'>
-                    <Link href="/blogs" className='text-xl flex items-center gap-2 '><VscArrowLeft /> Back</Link>
-                </div>
+            <div className='w-11/12 lg:w-1/2 mx-auto'>
                 <BlogItem data={data} isEditable={user == data?.user_id} />
             </div>
         </div>
     )
 }
 
-export async function generateStaticParams() {
-    const blogs = await createServerClient().from("data").select("*")
-    return blogs.data?.map((data) => ({
-        id: data.id
-    }))
-}
+export default page

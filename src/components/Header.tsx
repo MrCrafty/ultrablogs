@@ -7,7 +7,7 @@ const Header = async () => {
     const { data: { session } } = await createServerClient().auth.getSession();
 
     return (
-        <div className='border-b-2 border-gray-300 shadow-xl'>
+        <div className='border-b-2 border-gray-300 shadow-xl w-full fixed top-0 left-0 bg-white px-5 z-50'>
             <div className='py-4 container mx-auto'>
                 <ul className='flex justify-between'>
                     <ul className='flex gap-3'>

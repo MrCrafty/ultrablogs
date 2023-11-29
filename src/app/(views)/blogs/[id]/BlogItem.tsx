@@ -5,6 +5,7 @@ import { BlockNoteView } from '@blocknote/react';
 import "@blocknote/core/style.css"
 import { useRouter } from 'next/navigation';
 import { supabaseClient } from '@/lib/dbClient';
+import { VscArrowLeft } from 'react-icons/vsc';
 
 const BlogItem = (data: any) => {
     const router = useRouter();
@@ -21,8 +22,14 @@ const BlogItem = (data: any) => {
             seteditable(false);
         })
     }
+    function handleBack() {
+        router.back()
+    }
     return (
         <div>
+            <div className='inline-block mb-5'>
+                <button onClick={() => handleBack()} className='text-xl flex items-center gap-2 '><VscArrowLeft /> Back</button>
+            </div>
             <div className='border-b-2 py-2'>
                 <h1 className='text-5xl text-text-semibold mb-4'>{data?.data?.title}</h1>
                 <div className='flex mb-4'>

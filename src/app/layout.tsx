@@ -13,12 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
       <body className={inter.className + " text-black"}>
         <header>
           <Header />
         </header>
-        {children}</body>
+        <main className='pt-24'>
+          {children}
+        </main>
+      </body>
     </html>
   )
 }

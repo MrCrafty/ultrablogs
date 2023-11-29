@@ -18,6 +18,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
                     <li className='flex gap-3'>
                         <button onClick={async () => { await supabaseClient.auth.signOut(); router.refresh(); }}>Sign Out</button>
                         <a href="/blogs/addblog">Add Blog</a>
+                        <a href="/myblogs">My Blogs</a>
                     </li>
             }
         </ul>
