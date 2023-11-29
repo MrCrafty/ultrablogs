@@ -1,13 +1,15 @@
 //@ts-nocheck
 'use client'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 
 const BlogList = (data: any) => {
+    const router = useRouter()
     const supabase = createClientComponentClient();
     const handleDelete = async (id) => {
-        await supabase.from("data").delete().eq("id", id).then(() => getData())
+        await supabase.from("data").delete().eq("id", id).then(router.refresh())
     }
     return (
         <div>
