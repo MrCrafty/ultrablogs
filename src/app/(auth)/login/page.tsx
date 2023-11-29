@@ -1,9 +1,8 @@
 import Login from '@/components/Login'
 import React from 'react'
 import { Metadata } from 'next';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import { createServerClient } from '@/lib/db';
 
 export const metadata: Metadata = {
     title: "Login",
@@ -11,9 +10,8 @@ export const metadata: Metadata = {
 }
 
 const page = async () => {
-    const cookieStore = cookies()
-    const supabase = createServerComponentClient({ cookies: () => cookieStore })
-    const { data: { session } } = await supabase.auth.getSession();
+
+    const { data: { session } } = await createServerClient().auth.getSession();
     if (session != null) {
         return redirect("/")
     } else {

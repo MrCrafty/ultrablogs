@@ -1,17 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PiUserCircleLight } from "react-icons/pi";
 import { FiLoader } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import { Metadata } from "next";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { supabaseClient } from "@/lib/dbClient";
 
 export const metadata: Metadata = {
     title: "Register"
 }
 
 const Register = () => {
-    const supabase = createClientComponentClient();
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +19,7 @@ const Register = () => {
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitting(true);
-        const login = await supabase.auth.signUp({ email: email, password: password });
+        const login = await supabaseClient.auth.signUp({ email: email, password: password });
         const handleError = () => { setSubmitting(false); (alert(login?.error?.message)); }
         const handleRegister = () => { alert("Successfully Registered"); router.push("/"); router.refresh(); }
         login.error ? handleError() : handleRegister();

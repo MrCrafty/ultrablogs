@@ -1,14 +1,10 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
 import React from 'react'
 import AuthButtons from './AuthButtons'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { createServerClient } from '@/lib/db'
 
 const Header = async () => {
-    const cookieStore = cookies()
-    const supabase = createServerComponentClient({ cookies: () => cookieStore });
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await createServerClient().auth.getSession();
 
     return (
         <div className='border-b-2 border-gray-300 shadow-xl'>

@@ -1,13 +1,11 @@
 'use client'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { supabaseClient } from '@/lib/dbClient'
 import { Session } from '@supabase/supabase-js'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const AuthButtons = ({ session }: { session: Session | null }) => {
-    const supabase = createClientComponentClient()
     const router = useRouter();
     return (
         <ul className='flex gap-3'>
@@ -18,7 +16,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
                         <li><Link href="/register">Sign Up</Link></li>
                     </> :
                     <li className='flex gap-3'>
-                        <button onClick={async () => { await supabase.auth.signOut(); router.refresh(); }}>Sign Out</button>
+                        <button onClick={async () => { await supabaseClient.auth.signOut(); router.refresh(); }}>Sign Out</button>
                         <a href="/blogs/addblog">Add Blog</a>
                     </li>
             }

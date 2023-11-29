@@ -3,11 +3,10 @@ import { BlockNoteEditor } from '@blocknote/core';
 import React, { useState } from 'react'
 import { BlockNoteView } from '@blocknote/react';
 import "@blocknote/core/style.css"
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
+import { supabaseClient } from '@/lib/dbClient';
 
 const BlogItem = (data: any) => {
-    const supabase = createClientComponentClient();
     const router = useRouter();
     const [editable, seteditable] = useState(false)
     const [initialData, setInitialData] = useState(data?.data?.data)
@@ -17,7 +16,7 @@ const BlogItem = (data: any) => {
     })
     async function handleSave() {
         console.log(editor.topLevelBlocks)
-        await supabase.from("data").update({ data: editor.topLevelBlocks }).eq("id", data?.data?.id).then(() => {
+        await supabaseClient.from("data").update({ data: editor.topLevelBlocks }).eq("id", data?.data?.id).then(() => {
             setInitialData(editor.topLevelBlocks)
             seteditable(false);
         })

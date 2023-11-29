@@ -1,17 +1,16 @@
 'use client'
+import { supabaseClient } from '@/lib/dbClient';
 import React, { useState } from 'react'
 import { PiUserCircleLight } from 'react-icons/pi';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 
 const Login = () => {
-    const supabase = createClientComponentClient();
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await supabase.auth.signInWithPassword({ email: email, password: password })
+        const res = await supabaseClient.auth.signInWithPassword({ email: email, password: password })
         if (res.error) {
             window.alert(res.error.message)
         } else {
