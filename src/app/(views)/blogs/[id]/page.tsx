@@ -9,9 +9,8 @@ const metadata: Metadata = {
     title: `Blog Page`,
     description: "Blog Page"
 }
-const page = async ({ params }: { params: { id: string } }) => {
+export const page = async ({ params }: { params: { id: string } }) => {
     const user = (await createServerClient().auth.getSession()).data.session?.user.id;
-
     async function getData(id: string) {
         const res = await createServerClient().from("data").select().eq("id", id).limit(1).single();
         if (res.error) {
@@ -33,4 +32,9 @@ const page = async ({ params }: { params: { id: string } }) => {
     )
 }
 
-export default page
+export async function generateStaticParams() {
+    const blogs = await createServerClient().from("data").select("*")
+    return blogs.data?.map((data) => ({
+        id: data.id
+    }))
+}
