@@ -17,7 +17,7 @@ export default function RootLayout({
         <header>
           <Header />
         </header>
-        <main className='pt-24'>
+        <main className='pt-24 font-Poppins'>
           {children}
         </main>
       </body>
