@@ -9,3 +9,9 @@ export const createServerClient = cache(() => {
     cookies: () => cookieStore,
   });
 });
+
+export const getPageData = async () => {
+  return (
+    await createServerClient().from("static_data").select("*").limit(1).single()
+  ).data.data;
+};
