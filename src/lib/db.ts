@@ -10,8 +10,8 @@ export const createServerClient = cache(() => {
   });
 });
 
-export const getPageData = async () => {
+export async function getPageData() {
   return (
     await createServerClient().from("static_data").select("*").limit(1).single()
   ).data.data;
-};
+}

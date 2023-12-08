@@ -1,27 +1,30 @@
-import React from 'react'
-import BlogList from './BlogList'
-import { redirect } from 'next/navigation';
+import React from "react";
+import BlogList from "./BlogList";
+import { redirect } from "next/navigation";
 import "@blocknote/core/style.css";
-import { createServerClient } from '@/lib/db';
-import { Metadata } from 'next';
+import { createServerClient } from "@/lib/db";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Blogs',
-    description: "Blogs"
-}
+  title: "Blogs",
+  description: "Blogs",
+};
 
 const Blogs = async () => {
-    const { data: { session } } = await createServerClient().auth.getSession();
-    if (session == null) {
-        return redirect("/")
-    } else {
-        return (
-            <div className='container'>
-                <div><BlogList /></div>
-            </div>
-        )
-    }
+  const {
+    data: { session },
+  } = await createServerClient().auth.getSession();
+  if (session == null) {
+    return redirect("/");
+  } else {
+    return (
+      <div className="container">
+        <div>
+          <BlogList />
+        </div>
+      </div>
+    );
+  }
+};
 
-}
-
-export default Blogs
+export default Blogs;
