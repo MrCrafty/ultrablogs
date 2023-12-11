@@ -21,7 +21,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
           </li>
         </>
       ) : (
-        <div>
+        <div className="">
           <li
             className="flex gap-2 cursor-pointer"
             onClick={() => {
@@ -34,7 +34,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
             <IoIosArrowDown className="self-center" />
           </li>
           <li
-            className={`flex flex-col w-36 gap-3 absolute left-0 top-10 [&>a]:text-center transition-all bg-gray-300 bg-opacity-50 ${
+            className={`flex flex-col w-36 gap-3 absolute left-0 top-12 [&>a]:text-center transition-all bg-gray-300 bg-opacity-50 ${
               profileOpen ? "p-2" : "h-0 p-0 overflow-hidden"
             }  `}
           >
