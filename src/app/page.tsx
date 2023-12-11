@@ -10,9 +10,5 @@ export default async function Page() {
   const user = (await supabase.auth.getSession()).data.session?.user
     .user_metadata["firstname"];
   console.log(user);
-  return (
-    <>
-      <Home data={user} />
-    </>
-  );
+  return <>{/* <Home data={user} /> */}</>;
 }
