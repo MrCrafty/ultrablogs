@@ -7,17 +7,7 @@ export const metadata: Metadata = {
   title: `Blog Page`,
   description: "Blog Page",
 };
-export const generateStaticParams = async () => {
-  const blogs = await createServerClient().from("data").select("id");
-  const blogposts = blogs.data?.map((data) => {
-    return { id: data.id };
-  });
-  if (blogposts !== undefined) {
-    return blogposts;
-  } else {
-    return [];
-  }
-};
+
 const page = async ({ params }: { params: { id: string } }) => {
   const user = (await createServerClient().auth.getSession()).data.session
     ?.user;
@@ -55,3 +45,17 @@ const page = async ({ params }: { params: { id: string } }) => {
 };
 
 export default page;
+
+//Known issue in Nextjs, cookie cannot be accessed inside function other than default
+
+// export const generateStaticParams = async () => {
+//   const blogs = await createServerClient().from("data").select("id");
+//   const blogposts = blogs.data?.map((data) => {
+//     return { id: data.id };
+//   });
+//   if (blogposts !== undefined) {
+//     return blogposts;
+//   } else {
+//     return [];
+//   }
+// };
