@@ -41,6 +41,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
             <button
               onClick={async () => {
                 await supabaseClient.auth.signOut();
+                router.push("/");
                 router.refresh();
               }}
             >
