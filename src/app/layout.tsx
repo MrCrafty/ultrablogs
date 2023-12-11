@@ -1,15 +1,14 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '@/components/Header'
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ['latin'] })
-
-
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -17,10 +16,11 @@ export default function RootLayout({
         <header>
           <Header />
         </header>
-        <main className='pt-24 font-Poppins'>
+        <main className="pt-24 font-Poppins">
           {children}
+          <SpeedInsights />
         </main>
       </body>
     </html>
-  )
+  );
 }
