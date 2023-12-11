@@ -3,7 +3,7 @@ import BlogItem from "./BlogItem";
 import { createServerClient } from "@/lib/db";
 import { Metadata } from "next";
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: `Blog Page`,
   description: "Blog Page",
 };
@@ -24,13 +24,19 @@ const page = async ({ params }: { params: { id: string } }) => {
     }
   }
   const data = await getData(params.id);
+  const blogUser = (await createServerClient()
+    .from("user_data")
+    .select("*")
+    .eq("id", data?.user_id))!.data;
+
   return (
     <div className="text-black container">
       <div className="w-11/12 lg:w-1/2 mx-auto">
         <BlogItem
           data={data}
           isEditable={user?.id == data?.user_id}
-          user={user}
+          //@ts-ignore blogUser possibly "Null"
+          user={blogUser[0]}
         />
       </div>
     </div>

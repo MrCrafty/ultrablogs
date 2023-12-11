@@ -20,11 +20,8 @@ const SearchBar = () => {
             setQuery(e.target.value);
           }}
           type="text"
-          className="w-full bg-gray-200 text-black placeholder:text-black px-3 py-2"
+          className="w-full border-b-2 focus:outline-none text-black placeholder:text-black px-3 py-2"
           placeholder="&#x1F50D; Search Blogs"
-          onSubmit={() => {
-            alert("Submitted");
-          }}
         />
         <input type="submit" className="hidden" />
       </form>

@@ -28,6 +28,7 @@ const BlogItem = (data: any) => {
   function handleBack() {
     router.back();
   }
+
   return (
     <div>
       <div className="inline-block mb-5">
@@ -61,9 +62,7 @@ const BlogItem = (data: any) => {
             ))}
           </div>
           <div className="capitalize text-gray-400">
-            {data?.user.user_metadata["firstname"] +
-              " " +
-              data?.user.user_metadata["lastname"]}
+            By, {data.user.firstname + " " + data?.user?.lastname}
           </div>
         </div>
       </div>

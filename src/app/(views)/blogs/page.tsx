@@ -14,17 +14,13 @@ const Blogs = async () => {
   const {
     data: { session },
   } = await createServerClient().auth.getSession();
-  if (session == null) {
-    return redirect("/");
-  } else {
-    return (
-      <div className="container">
-        <div>
-          <BlogList />
-        </div>
+  return (
+    <div className="container">
+      <div>
+        <BlogList />
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default Blogs;
