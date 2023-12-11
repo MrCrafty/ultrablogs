@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   title: `Blog Page`,
   description: "Blog Page",
 };
+export const generateStaticParams = async () => {
+  const blogs = await createServerClient().from("data").select("id");
+  const blogposts = blogs.data?.map((data) => {
+    return { id: data.id };
+  });
+  if (blogposts !== undefined) {
+    return blogposts;
+  } else {
+    return [];
+  }
+};
 const page = async ({ params }: { params: { id: string } }) => {
   const user = (await createServerClient().auth.getSession()).data.session
     ?.user;
