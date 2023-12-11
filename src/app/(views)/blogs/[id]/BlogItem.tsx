@@ -16,7 +16,6 @@ const BlogItem = (data: any) => {
     editable: editable,
   });
   async function handleSave() {
-    console.log(editor.topLevelBlocks);
     await supabaseClient
       .from("data")
       .update({ data: editor.topLevelBlocks })

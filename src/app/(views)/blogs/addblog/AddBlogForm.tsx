@@ -57,11 +57,9 @@ const AddBlogForm = () => {
           }_${d.getTime()}`,
           file
         );
-      console.log(res, "res");
       var imgPath = supabaseClient.storage
         .from("Images")
         .getPublicUrl(res.data?.path ?? "");
-      console.log(imgPath, "imgPath");
 
       if (res.error) {
         reject(res.error.message);
