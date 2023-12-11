@@ -14,6 +14,8 @@ const Register = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +24,12 @@ const Register = () => {
     const login = await supabaseClient.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          firstname: firstname,
+          lastname: lastname,
+        },
+      },
     });
     const handleError = () => {
       setSubmitting(false);
@@ -34,7 +42,6 @@ const Register = () => {
     };
     login.error ? handleError() : handleRegister();
   };
-
   return (
     <div className="container mx-auto">
       <div>
@@ -47,13 +54,35 @@ const Register = () => {
           <PiUserCircleLight className="text-6xl text-black bg-white absolute -top-8 left-1/2 -translate-x-1/2" />
           <h3 className="text-3xl text-center my-5 text-black">Register</h3>
           <input
+            required
+            onChange={(e) => {
+              setFirstname(e.target.value);
+            }}
+            className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black"
+            type="text"
+            name="firstname"
+            placeholder="Firstname"
+            autoComplete="firstname"
+          />
+          <input
+            required
+            onChange={(e) => {
+              setLastname(e.target.value);
+            }}
+            className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black"
+            type="text"
+            name="lastname"
+            placeholder="Lastname"
+            autoComplete="lastname"
+          />
+          <input
             onChange={(e) => {
               setemail(e.target.value);
             }}
             className="px-3 py-1 text-xl bg-transparent outline-none border-b-[1px] text-black"
             type="email"
             name="email"
-            placeholder="Enter email"
+            placeholder="Email"
             autoComplete="email"
           />
           <input

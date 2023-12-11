@@ -3,12 +3,10 @@ import { supabaseClient } from "@/lib/dbClient";
 import { Session } from "@supabase/supabase-js";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
+import React from "react";
 
-const AuthButtons = ({ session }: { session: Session | null }) => {
+export const AuthButtons = ({ session }: { session: Session | null }) => {
   const router = useRouter();
-  const [profileOpen, setProfileOpen] = useState(false);
   return (
     <ul className="flex gap-3 relative">
       {session == null ? (
@@ -22,22 +20,16 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
         </>
       ) : (
         <div>
-          <li
-            className="flex gap-2 cursor-pointer"
-            onClick={() => {
-              setProfileOpen(!profileOpen);
-            }}
-          >
-            <span className="capitalize ">
-              Hi, {session.user.user_metadata["firstname"]}
+          <li>
+            Hi,{" "}
+            <span className="capitalize">
+              {session.user.user_metadata["firstname"]}
             </span>
-            <IoIosArrowDown className="self-center" />
+            <span>
+              <IoIosArrowDown />
+            </span>
           </li>
-          <li
-            className={`flex flex-col w-36 gap-3 absolute left-0 top-10 [&>a]:text-center transition-all bg-gray-300 bg-opacity-50 ${
-              profileOpen ? "p-2" : "h-0 p-0 overflow-hidden"
-            }  `}
-          >
+          <li className="flex flex-col w-36 gap-3 absolute left-0 top-10 [&>a]:text-center p-2 bg-gray-300 bg-opacity-50">
             <button
               onClick={async () => {
                 await supabaseClient.auth.signOut();
@@ -54,5 +46,3 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
     </ul>
   );
 };
-
-export default AuthButtons;

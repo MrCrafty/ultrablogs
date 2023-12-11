@@ -24,7 +24,7 @@ const AnimatedTextCharacter = ({ text }: { text: string }) => {
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 100,
+        stiffness: 200,
       },
     },
     hidden: {
@@ -34,7 +34,7 @@ const AnimatedTextCharacter = ({ text }: { text: string }) => {
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 100,
+        stiffness: 200,
       },
     },
   };

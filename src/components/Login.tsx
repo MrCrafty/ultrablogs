@@ -17,6 +17,7 @@ const Login = () => {
       password: password,
     });
     if (res.error) {
+      setSubmitting(false);
       window.alert(res.error.message);
     } else {
       window.alert("successfully signed in");
