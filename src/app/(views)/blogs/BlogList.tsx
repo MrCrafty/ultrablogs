@@ -7,7 +7,22 @@ import { useSearchParams } from "next/navigation";
 
 const BlogList = () => {
   const [data, setData] = useState<any>();
+  const [userData, setUserData] = useState<any>();
   const query = useSearchParams();
+  async function getUserData(id: string) {
+    const supabase = createClientComponentClient();
+    const res = await supabase
+      .from("user_data")
+      .select("*")
+      .eq("id", id)
+      .limit(1)
+      .single();
+    if (res.error) {
+      return res.error.message;
+    } else {
+      return res.data;
+    }
+  }
   async function getData() {
     const supabase = createClientComponentClient();
     const res = await supabase
@@ -37,6 +52,7 @@ const BlogList = () => {
                 title: string;
                 categories: string[];
                 inserted_at: string;
+                user_id: string;
               },
               index: number
             ) => {
@@ -50,7 +66,7 @@ const BlogList = () => {
                     delay: index / 15,
                   }}
                   key={index}
-                  className="border-b-2 py-2 flex justify-between"
+                  className="border-b-2 py-5 flex justify-between"
                 >
                   <div>
                     <motion.h1
@@ -66,7 +82,6 @@ const BlogList = () => {
                       </Link>
                     </motion.h1>
                     <div className="flex mb-4">
-                      <p>Tags: </p>
                       {data?.categories?.map((item, index) => (
                         <p
                           className={`px-3 text-gray-500 ${
@@ -79,9 +94,14 @@ const BlogList = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-end">
+                  <div className="flex justify-around flex-col">
                     <p className="text-gray-300 text-sm">
                       {data?.inserted_at.slice(0, 10)}
+                    </p>
+                    <p className="capitalize">
+                      by,{" "}
+                      {getUserData(data?.user_id).then((res) => res.firstname)}{" "}
+                      {getUserData(data?.user_id).then((res) => res.lastname)}
                     </p>
                   </div>
                 </motion.div>
