@@ -2,6 +2,8 @@ import React from "react";
 import BlogItem from "./BlogItem";
 import { createServerClient } from "@/lib/db";
 import { Metadata } from "next";
+import CommentBox from "@/components/CommentBox";
+import Comments from "@/components/Comments";
 
 export const metadata: Metadata = {
   title: `Blog Page`,
@@ -24,6 +26,12 @@ const page = async ({ params }: { params: { id: string } }) => {
       return res.data;
     }
   }
+  const res = await createServerClient()
+    .from("data")
+    .select("comments")
+    .eq("id", params.id)
+    .limit(1)
+    .single();
   const data = await getData(params.id);
   const blogUser = (await createServerClient()
     .from("user_data")
@@ -39,6 +47,9 @@ const page = async ({ params }: { params: { id: string } }) => {
           //@ts-ignore blogUser possibly "Null"
           user={blogUser[0]}
         />
+        <h3 className="text-2xl mt-5">Comments</h3>
+        <CommentBox user={user} blog_id={params.id} />
+        <Comments blog_id={params.id} comments={res.data?.comments} />
       </div>
     </div>
   );

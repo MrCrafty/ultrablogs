@@ -1,5 +1,6 @@
 "use client";
 import { supabaseClient } from "@/lib/dbClient";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FiLoader } from "react-icons/fi";
 import { PiUserCircleLight } from "react-icons/pi";
@@ -8,7 +9,7 @@ const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
+  const router = useRouter();
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
@@ -21,7 +22,8 @@ const Login = () => {
       window.alert(res.error.message);
     } else {
       window.alert("successfully signed in");
-      window.location.href = "/";
+      router.back();
+      router.refresh();
     }
   };
   return (
