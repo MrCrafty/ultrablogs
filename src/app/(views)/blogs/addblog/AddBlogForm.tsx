@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/dbClient";
 import { FiLoader } from "react-icons/fi";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { BiSolidCameraPlus } from "react-icons/bi";
 
 const AddBlogForm = () => {
   const router = useRouter();
@@ -45,6 +47,7 @@ const AddBlogForm = () => {
   const [tags, setTags] = useState({ tags: [] });
   const [blog, setBlog] = useState<Block[]>();
   const [submitting, setSubmitting] = useState(false);
+  const [coverImage, setCoverImage] = useState<File>();
   const handleImageUpload = async (file: File) => {
     return new Promise<string>(async (resolve, reject) => {
       const res = await supabaseClient.storage
@@ -68,6 +71,7 @@ const AddBlogForm = () => {
       }
     });
   };
+
   const editor = useBlockNote({
     uploadFile: handleImageUpload,
   });
@@ -81,6 +85,38 @@ const AddBlogForm = () => {
         className="flex flex-col gap-3"
       >
         <div className="w-full">
+          <div className="relative">
+            {/* <Image
+              alt=""
+              className="w-full"
+              src={
+                coverImage ??
+                "https://www.dummyimage.com/16:9x1080&text=Cover Image"
+              }
+              width={5000}
+              height={5000}
+            /> */}
+
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <label
+                htmlFor="cover_image"
+                className="flex items-center flex-col p-5 border-2 border-gray-500 backdrop-blur-xl rounded-xl bg-white bg-opacity-50"
+              >
+                <BiSolidCameraPlus className="text-4xl" />{" "}
+                <span>Browse Cover Image...</span>
+              </label>
+              <input
+                type="file"
+                name="cover_image"
+                id="cover_image"
+                className="hidden"
+                onChange={(e) => {
+                  // @ts-ignore
+                  setCoverImage(e.target.files[0]);
+                }}
+              />
+            </div>
+          </div>
           <input
             type="text"
             name="title"

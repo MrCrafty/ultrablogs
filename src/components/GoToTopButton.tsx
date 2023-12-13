@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 const GoToTopButton = () => {
   return (
     <motion.button
-      animate={{ y: [0, 8, 0] }}
-      transition={{ repeat: Infinity, duration: 1.2 }}
+      animate={{ y: [0, 15, 0] }}
+      transition={{ repeat: Infinity, duration: 3 }}
       className={`fixed bottom-20 right-20 bg-black text-white p-4 transition-all`}
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });

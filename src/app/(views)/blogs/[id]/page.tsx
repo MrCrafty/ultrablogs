@@ -47,8 +47,8 @@ const page = async ({ params }: { params: { id: string } }) => {
           //@ts-ignore blogUser possibly "Null"
           user={blogUser[0]}
         />
-        <h3 className="text-2xl mt-5">Comments</h3>
         <CommentBox user={user} blog_id={params.id} />
+        <h3 className="text-2xl py-3 my-3">Comments</h3>
         <Comments blog_id={params.id} comments={res.data?.comments} />
       </div>
     </div>

@@ -9,6 +9,15 @@ import { IoIosArrowDown } from "react-icons/io";
 const AuthButtons = ({ session }: { session: Session | null }) => {
   const router = useRouter();
   const [profileOpen, setProfileOpen] = useState(false);
+  if (profileOpen) {
+    document.body.addEventListener("click", () => {
+      setProfileOpen(false);
+    });
+  } else {
+    document.body.removeEventListener("click", () => {
+      setProfileOpen(false);
+    });
+  }
   return (
     <ul className="flex gap-3 relative">
       {session == null ? (
@@ -23,7 +32,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
       ) : (
         <div className="">
           <li
-            className="flex gap-2 cursor-pointer"
+            className="flex gap-2 cursor-pointer z-50"
             onClick={() => {
               setProfileOpen(!profileOpen);
             }}
