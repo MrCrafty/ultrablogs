@@ -50,11 +50,7 @@ const CommentBox = ({ user, blog_id }: any) => {
   }
   return (
     <div className="py-5">
-      <form
-        onSubmit={(e) => {
-          handleComment(e);
-        }}
-      >
+      <form onSubmit={handleComment}>
         <textarea
           name="comments"
           className="w-full border-2 h-40 p-3"

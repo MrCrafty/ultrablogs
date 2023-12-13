@@ -18,10 +18,39 @@ import Image from "next/image";
 import { BiSolidCameraPlus } from "react-icons/bi";
 
 const AddBlogForm = () => {
+  //Variables
   const router = useRouter();
+  var d = new Date();
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState({ tags: [] });
+  const [blog, setBlog] = useState<Block[]>();
+  const [submitting, setSubmitting] = useState(false);
+  const [coverImage, setCoverImage] = useState(null);
+  const [coverImagePreview, setCoverImagePreview] = useState<string>();
+
+  //Handlers
   const handleFormSuccess = () => {
     alert("Saved Successfully");
     router.push("/blogs");
+  };
+  const handleCoverImageUpload = async () => {
+    if (coverImage != null) {
+      const res = await supabaseClient.storage.from("Images").upload(
+        `Blog_Cover/cover_${
+          (
+            await supabaseClient.auth.getSession()
+          ).data?.session?.user?.id
+        }_${d.getTime()}`,
+        //@ts-ignore
+        coverImage
+      );
+      var imgPath = supabaseClient.storage
+        .from("Images")
+        .getPublicUrl(res.data?.path ?? "");
+      return imgPath.data.publicUrl.toString();
+    } else {
+      return null;
+    }
   };
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,15 +68,10 @@ const AddBlogForm = () => {
       categories: tags.tags,
       data: blog,
       user_id: (await supabaseClient.auth.getSession()).data.session?.user.id,
+      cover_image: await handleCoverImageUpload(),
     });
     res.error ? alert(res.error.message) : handleFormSuccess();
   };
-  var d = new Date();
-  const [title, setTitle] = useState("");
-  const [tags, setTags] = useState({ tags: [] });
-  const [blog, setBlog] = useState<Block[]>();
-  const [submitting, setSubmitting] = useState(false);
-  const [coverImage, setCoverImage] = useState<File>();
   const handleImageUpload = async (file: File) => {
     return new Promise<string>(async (resolve, reject) => {
       const res = await supabaseClient.storage
@@ -71,13 +95,20 @@ const AddBlogForm = () => {
       }
     });
   };
-
+  const handleCoverPreview = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      //@ts-ignore
+      setCoverImage(e.target.files[0]);
+      setCoverImagePreview(URL.createObjectURL(e.target.files[0]));
+    }
+  };
   const editor = useBlockNote({
     uploadFile: handleImageUpload,
   });
   editor.onEditorContentChange(async () => {
     setBlog(editor.topLevelBlocks);
   });
+
   return (
     <div className="w-11/12 lg:w-1/2 mx-auto my-5">
       <form
@@ -86,16 +117,16 @@ const AddBlogForm = () => {
       >
         <div className="w-full">
           <div className="relative">
-            {/* <Image
+            <Image
               alt=""
               className="w-full"
               src={
-                coverImage ??
+                coverImagePreview ??
                 "https://www.dummyimage.com/16:9x1080&text=Cover Image"
               }
               width={5000}
               height={5000}
-            /> */}
+            />
 
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <label
@@ -111,8 +142,7 @@ const AddBlogForm = () => {
                 id="cover_image"
                 className="hidden"
                 onChange={(e) => {
-                  // @ts-ignore
-                  setCoverImage(e.target.files[0]);
+                  handleCoverPreview(e);
                 }}
               />
             </div>

@@ -6,6 +6,7 @@ import "@blocknote/core/style.css";
 import { useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/dbClient";
 import { VscArrowLeft } from "react-icons/vsc";
+import Image from "next/image";
 
 const BlogItem = (data: any) => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const BlogItem = (data: any) => {
   function handleBack() {
     router.back();
   }
-
+  console.log(data?.data?.cover_image);
   return (
     <div className="border-b-2 pb-5">
       <div className="inline-block mb-5">
@@ -39,12 +40,23 @@ const BlogItem = (data: any) => {
           <VscArrowLeft /> Back
         </button>
       </div>
+      {data?.data?.cover_image && (
+        <div className="w-full max-h-96 overflow-hidden mb-10">
+          <Image
+            alt=""
+            src={data?.data?.cover_image}
+            height={1000}
+            width={1000}
+            className=""
+          />
+        </div>
+      )}
       <div className="border-b-2 py-2">
         <div className="flex justify-between">
           <h1 className="text-5xl text-text-semibold mb-4">
             {data?.data?.title}
           </h1>
-          <p className="text-gray-300 text-sm">
+          <p className="text-gray-300 text-sm min-w-fit">
             {data?.data?.inserted_at?.slice(0, 10)}
           </p>
         </div>

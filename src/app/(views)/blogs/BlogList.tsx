@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 
 const BlogList = () => {
   const [data, setData] = useState<any>();
-  const [userData, setUserData] = useState<any>();
   const query = useSearchParams();
   async function getUserData(id: string) {
     const supabase = createClientComponentClient();
@@ -70,9 +69,12 @@ const BlogList = () => {
                 >
                   <div>
                     <motion.h1
-                      whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
+                      whileHover={{
+                        scale: 1.03,
+                        transition: { duration: 0.05 },
+                      }}
                       whileTap={{ scale: 0.9 }}
-                      className="text-4xl text-text-semibold my-4"
+                      className="text-3xl text-text-semibold my-4"
                     >
                       <Link
                         className="hover:text-red-300 transition-all"
@@ -94,7 +96,7 @@ const BlogList = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex justify-around flex-col">
+                  <div className="flex justify-around flex-col min-w-fit text-right">
                     <p className="text-gray-300 text-sm">
                       {data?.inserted_at.slice(0, 10)}
                     </p>
