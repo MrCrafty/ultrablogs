@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import "./style.css";
@@ -14,20 +14,31 @@ import { useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/dbClient";
 import { FiLoader } from "react-icons/fi";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { BiSolidCameraPlus } from "react-icons/bi";
+import ImageInput from "./ImageInput";
+import CategoryTab from "./CategoryTab";
+import AddCategoryForm from "./AddCategoryForm";
 
 const AddBlogForm = () => {
   //Variables
-  const router = useRouter();
   var d = new Date();
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState({ tags: [] });
   const [blog, setBlog] = useState<Block[]>();
   const [submitting, setSubmitting] = useState(false);
   const [coverImage, setCoverImage] = useState(null);
   const [coverImagePreview, setCoverImagePreview] = useState<string>();
+  const [totalCategories, setTotalCategories] = useState<string[]>();
+  const [categories, setCategories] = useState<string[]>([]);
 
+  //Data Fetching Functions
+  const getCategories = async () => {
+    const res: any = await supabaseClient.from("static_data").select("*");
+    setTotalCategories(res?.data[0].data.categories);
+  };
+  useEffect(() => {
+    getCategories();
+  }, []);
   //Handlers
   const handleFormSuccess = () => {
     alert("Saved Successfully");
@@ -54,7 +65,6 @@ const AddBlogForm = () => {
   };
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (
       tags.tags.length == 0 ||
       editor.topLevelBlocks.length == 1 ||
@@ -62,13 +72,17 @@ const AddBlogForm = () => {
     ) {
       return alert("Please Enter all the values");
     }
+    if (categories.length < 1) {
+      return alert("Please select atleast 1 category");
+    }
     setSubmitting(true);
     const res = await supabaseClient.from("data").insert({
       title: title,
-      categories: tags.tags,
+      tags: tags.tags,
       data: blog,
       user_id: (await supabaseClient.auth.getSession()).data.session?.user.id,
       cover_image: await handleCoverImageUpload(),
+      categories: categories,
     });
     res.error ? alert(res.error.message) : handleFormSuccess();
   };
@@ -102,13 +116,23 @@ const AddBlogForm = () => {
       setCoverImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
+  const handleCategoryChange = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    var value = e.currentTarget.getAttribute("data-value")?.toString() ?? "";
+    var category = categories.indexOf(value);
+    if (category > -1) {
+      setCategories(categories.filter((c) => c != value));
+    } else {
+      setCategories([...categories, value]);
+    }
+  };
   const editor = useBlockNote({
     uploadFile: handleImageUpload,
   });
   editor.onEditorContentChange(async () => {
     setBlog(editor.topLevelBlocks);
   });
-
   return (
     <div className="w-11/12 lg:w-1/2 mx-auto my-5">
       <form
@@ -116,52 +140,38 @@ const AddBlogForm = () => {
         className="flex flex-col gap-3"
       >
         <div className="w-full">
-          <div className="relative">
-            <Image
-              alt=""
-              className="w-full"
-              src={
-                coverImagePreview ??
-                "https://www.dummyimage.com/16:9x1080&text=Cover Image"
-              }
-              width={5000}
-              height={5000}
-            />
-
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <label
-                htmlFor="cover_image"
-                className="flex items-center flex-col p-5 border-2 border-gray-500 backdrop-blur-xl rounded-xl bg-white bg-opacity-50"
-              >
-                <BiSolidCameraPlus className="text-4xl" />{" "}
-                <span>Browse Cover Image...</span>
-              </label>
-              <input
-                type="file"
-                name="cover_image"
-                id="cover_image"
-                className="hidden"
-                onChange={(e) => {
-                  handleCoverPreview(e);
-                }}
-              />
-            </div>
-          </div>
-          <input
-            type="text"
-            name="title"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            className="pl-0 w-full focus:outline-none px-4 py-2 text-4xl text-black placeholder:text-gray-400"
-            placeholder="Enter Blog Title"
+          <ImageInput
+            coverImagePreview={coverImagePreview}
+            handleCoverPreview={handleCoverPreview}
           />
         </div>
+        <input
+          type="text"
+          name="title"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          className="pl-0 w-full focus:outline-none mt-5 px-4 py-2 text-4xl text-black placeholder:text-gray-400"
+          placeholder="Enter Blog Title"
+        />
         <BlockNoteView
           editor={editor}
           theme={lightDefaultTheme}
           className="border-[1px] py-3 z-0 min-h-[500px]"
         />
+        <h2 className="text-2xl mt-5">Please Select Categories: </h2>
+        <div className="flex gap-5 mb-5">
+          {totalCategories?.map((cat, index) => {
+            return (
+              <CategoryTab
+                categories={categories}
+                category={cat}
+                handleCategoryChange={handleCategoryChange}
+                key={index}
+              />
+            );
+          })}
+        </div>
         <TagsInput
           inputProps={{
             placeholder: "Press enter to add tags",
