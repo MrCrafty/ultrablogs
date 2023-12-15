@@ -161,7 +161,7 @@ const AddBlogForm = () => {
           className="border-[1px] py-3 z-0 min-h-[500px]"
         />
         <h2 className="text-2xl mt-5">Please Select Categories: </h2>
-        <div className="flex gap-5 mb-5">
+        <div className="flex gap-5 mb-5 flex-wrap">
           {totalCategories?.map((cat, index) => {
             return (
               <CategoryTab
@@ -180,7 +180,7 @@ const AddBlogForm = () => {
           onlyUnique={true}
           value={tags.tags}
           focusedClassName="[&>span>input]:border-black [&>span>input]:border-[1px]"
-          className="[&>span>input]:text-sm [&>span>input]:w-5/12 lg:[&>span>input]:text-lg focus:outline-none px-3 py-2 bg-transparent border-[1px] border-gray-200 "
+          className="[&>span>input]:text-sm [&>span>input]:w-7/12 lg:[&>span>input]:w-5/12 lg:[&>span>input]:text-lg focus:outline-none px-3 py-2 bg-transparent border-[1px] border-gray-200 "
           onChange={(e) => setTags({ tags: e })}
         />
         <motion.button
@@ -189,7 +189,7 @@ const AddBlogForm = () => {
           whileTap={{ scale: 1 }}
           type="submit"
           disabled={!submitting ? false : true}
-          className={` w-2/5 lg:w-1/5 py-2 px-4  text-xl me-0 ms-auto ${
+          className={` w-2/5 lg:w-1/5 py-2 px-4  text-xl ms-0 me-auto ${
             submitting ? "bg-green-100 text-black" : " text-white bg-green-500"
           }`}
         >

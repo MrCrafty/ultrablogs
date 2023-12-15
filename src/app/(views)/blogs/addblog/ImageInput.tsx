@@ -25,7 +25,7 @@ const ImageInput = ({
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <label
           htmlFor="cover_image"
-          className="flex items-center flex-col p-5 border-2 border-gray-500 backdrop-blur-xl rounded-xl bg-white bg-opacity-50"
+          className="flex items-center flex-col py-3 lg:p-5 border-2 border-gray-500 backdrop-blur-xl rounded-xl bg-white bg-opacity-50"
         >
           <BiSolidCameraPlus className="text-4xl" />{" "}
           <span>Browse Cover Image...</span>

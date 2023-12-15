@@ -13,10 +13,6 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
     document.body.addEventListener("click", () => {
       setProfileOpen(false);
     });
-  } else {
-    document.body.removeEventListener("click", () => {
-      setProfileOpen(false);
-    });
   }
   return (
     <ul className="flex gap-3 relative">
@@ -43,7 +39,7 @@ const AuthButtons = ({ session }: { session: Session | null }) => {
             <IoIosArrowDown className="self-center" />
           </li>
           <li
-            className={`flex flex-col w-36 gap-3 absolute left-0 top-12 [&>a]:text-center transition-all bg-gray-300 bg-opacity-50 ${
+            className={`flex flex-col w-36 gap-3 absolute right-0 top-full [&>a]:text-center transition-all bg-white ${
               profileOpen ? "p-2" : "h-0 p-0 overflow-hidden"
             }  `}
           >

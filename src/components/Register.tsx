@@ -49,7 +49,7 @@ const Register = () => {
           onSubmit={(e) => {
             handleFormSubmit(e);
           }}
-          className="flex flex-col relative w-3/12 mx-auto p-6 rounded-lg shadow-2xl mt-44 border-[1px] gap-y-6"
+          className="flex flex-col relative w-11/12 lg:w-3/12 mx-auto p-5 rounded-lg shadow-2xl mt-10 lg:mt-44 border-[1px] gap-y-6"
         >
           <PiUserCircleLight className="text-6xl text-black bg-white absolute -top-8 left-1/2 -translate-x-1/2" />
           <h3 className="text-3xl text-center my-5 text-black">Register</h3>

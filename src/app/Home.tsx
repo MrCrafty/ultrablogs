@@ -4,9 +4,11 @@ import CategoryTabs from "./CategoryTabs";
 
 const Home = () => {
   return (
-    <div className="container mx-auto mt-5">
-      <h2 className="text-5xl border-b-2 border-gray-500 p-2">Explore Blogs</h2>
-      <div className="grid-cols-3 grid my-10 gap-5">
+    <div className="container mx-auto mt-5 px-3 lg:p-0">
+      <h2 className="text-3xl lg:text-5xl border-b-2 border-gray-500 p-2">
+        Explore Blogs
+      </h2>
+      <div className="grid-cols-1 lg:grid-cols-3 grid my-10 gap-5 ">
         <CategoryTabs
           image={
             "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
