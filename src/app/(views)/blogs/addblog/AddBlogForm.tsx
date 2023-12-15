@@ -16,7 +16,6 @@ import { FiLoader } from "react-icons/fi";
 import { motion } from "framer-motion";
 import ImageInput from "./ImageInput";
 import CategoryTab from "./CategoryTab";
-import AddCategoryForm from "./AddCategoryForm";
 
 const AddBlogForm = () => {
   //Variables
@@ -74,6 +73,8 @@ const AddBlogForm = () => {
     }
     if (categories.length < 1) {
       return alert("Please select atleast 1 category");
+    } else if (categories.length > 3) {
+      return alert("Max 3 categories can be selected");
     }
     setSubmitting(true);
     const res = await supabaseClient.from("data").insert({

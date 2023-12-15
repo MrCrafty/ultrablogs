@@ -12,7 +12,7 @@ const Header = async () => {
   return (
     <div className="border-b-2 border-gray-300 shadow-xl w-full fixed top-0 left-0 bg-white px-5 z-50">
       <div className="py-4 container mx-auto">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center text-xl">
           <ul className="flex gap-3">
             <li>
               <Link className="cursor-pointer" href="/">

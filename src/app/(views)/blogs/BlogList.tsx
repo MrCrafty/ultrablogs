@@ -37,12 +37,19 @@ const BlogList = () => {
   useEffect(() => {
     getData();
   }, []);
+  console.log(data?.data[0]?.categories.includes("SOmething"));
   return (
     <AnimatePresence>
       <motion.div className="w-11/12 lg:w-1/2 mx-auto">
         {data?.data
-          .filter((item: { title: string }) => {
-            return item?.title?.toLowerCase().includes(query.get("q") ?? "");
+          .filter((item: { title: string; categories: string[] }) => {
+            if (query.get("q")) {
+              return item?.title?.toLowerCase().includes(query.get("q") ?? "");
+            } else if (query.get("category")) {
+              return item?.categories.includes(query.get("category") ?? "");
+            } else {
+              return true;
+            }
           })
           .map(
             (
