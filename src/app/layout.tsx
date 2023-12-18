@@ -4,7 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoToTopButton from "@/components/GoToTopButton";
 import dynamic from "next/dynamic";
 import Loading from "./loading";
-import { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +30,7 @@ export default function RootLayout({
         <main className="pt-24 font-Poppins min-h-screen">
           {children}
           <SpeedInsights />
+          <Analytics />
         </main>
         <footer>
           <DynamicFooter />
