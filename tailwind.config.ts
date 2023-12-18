@@ -6,8 +6,16 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        primary: "#212121",
+        secondary: "#FFC107",
+        accent: "#607D8B",
+        background: "#FFFFFF",
+        text: "#757575",
+      },
       container: {
         center: true,
       },
@@ -19,6 +27,7 @@ const config: Config = {
       fontFamily: {
         Edu: "Edu VIC WA NT Beginner, cursive",
         Poppins: "Poppins",
+        DanceScript: "Dancing Script",
       },
     },
   },

@@ -1,9 +1,15 @@
 import React from "react";
-import ContactForm from "./ContactForm";
+import dynamic from "next/dynamic";
+import Loading from "@/app/loading";
+
+const DynamicForm = dynamic(() => import("./ContactForm"), {
+  loading: () => <Loading />,
+});
+
 const Page = () => {
   return (
     <div>
-      <ContactForm />
+      <DynamicForm />
     </div>
   );
 };

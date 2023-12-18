@@ -6,7 +6,7 @@ const SearchBar = () => {
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
   return (
-    <div>
+    <div className="">
       <form
         className="flex "
         onSubmit={(e) => {
@@ -22,7 +22,7 @@ const SearchBar = () => {
             setQuery(e.target.value);
           }}
           type="text"
-          className="w-full border-b-2 focus:outline-none text-black placeholder:text-black px-3 py-2"
+          className="w-full border-b-2 bg-transparent dark:text-white focus:outline-none text-black placeholder:text-black placeholder:dark:text-white px-3 py-2"
           placeholder="Search Blogs"
         />
         <input

@@ -1,11 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "asdygmjoxmcsbtbeomkr.supabase.co",
-      "www.dummyimage.com",
-      "images.unsplash.com",
-      "asset.brandfetch.io",
+    remotePatterns: [
+      {
+        hostname: "asdygmjoxmcsbtbeomkr.supabase.co",
+      },
+      {
+        hostname: "www.dummyimage.com",
+      },
+      {
+        hostname: "images.unsplash.com",
+      },
+      {
+        hostname: "asset.brandfetch.io",
+      },
     ],
   },
 };
