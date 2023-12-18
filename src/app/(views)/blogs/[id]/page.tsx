@@ -4,9 +4,9 @@ import { createServerClient } from "@/lib/db";
 import { Metadata } from "next";
 import CommentBox from "@/components/CommentBox";
 import Comments from "@/components/Comments";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: `Blog Page`,
   description: "Blog Page",
 };
 
@@ -21,7 +21,8 @@ const page = async ({ params }: { params: { id: string } }) => {
       .limit(1)
       .single();
     if (res.error) {
-      return res.error.message;
+      console.log(res.error);
+      return null;
     } else {
       return res.data;
     }
@@ -37,7 +38,12 @@ const page = async ({ params }: { params: { id: string } }) => {
     .from("user_data")
     .select("*")
     .eq("id", data?.user_id))!.data;
-
+  console.log(data, "blog-data");
+  metadata.title = data?.data?.title;
+  if (data == null) {
+    return redirect("/not-found");
+  } else {
+  }
   return (
     <div className="text-black container">
       <div className="w-11/12 lg:w-1/2 mx-auto">

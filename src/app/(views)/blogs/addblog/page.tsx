@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
-  title: "Add Blog",
+  title: "Add Blog | UltraBlogs",
   description: "Add Blog",
 };
 

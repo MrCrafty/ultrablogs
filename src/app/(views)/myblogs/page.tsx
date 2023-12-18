@@ -4,10 +4,15 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import Loading from "@/app/loading";
+import { Metadata } from "next";
 
 const DynamicBlogList = dynamic(() => import("./BlogList"), {
   loading: () => <Loading />,
 });
+
+export const metadata: Metadata = {
+  title: "My Blogs | UltraBlogs",
+};
 
 const page = async () => {
   const supabase = createServerClient();

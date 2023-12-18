@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
-  title: "Blogs",
+  title: "Blogs | UltraBlogs",
   description: "Blogs",
 };
 

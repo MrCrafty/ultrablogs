@@ -29,7 +29,6 @@ const BlogItem = (data: any) => {
   function handleBack() {
     router.back();
   }
-  console.log(data?.data?.cover_image);
   return (
     <div className="border-b-2 pb-5">
       <div className="inline-block mb-5">
