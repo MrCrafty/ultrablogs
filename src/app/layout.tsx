@@ -8,14 +8,6 @@ import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  icons: {
-    icon: {
-      href: "/public/Images",
-    },
-  },
-};
-
 const DynamicHeader = dynamic(() => import("../components/Header"), {
   loading: () => <Loading />,
 });
