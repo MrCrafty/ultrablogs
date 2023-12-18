@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoToTopButton from "@/components/GoToTopButton";
 import dynamic from "next/dynamic";
 import Loading from "./loading";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
