@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { supabaseClient } from "@/lib/dbClient";
@@ -9,6 +9,15 @@ import { IoMdHome } from "react-icons/io";
 const MobileSideBar = ({ session }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("h-screen");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("h-screen");
+    }
+  }, [isOpen, ""]);
   return (
     <div className="flex justify-between items-center relative gap-5">
       <button
@@ -38,6 +47,16 @@ const MobileSideBar = ({ session }: any) => {
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         >
+          <li
+            className="bg-blue-950 text-white"
+            onClick={() => {
+              setIsOpen(false);
+              router.push("/blogs");
+              router.refresh();
+            }}
+          >
+            Blogs
+          </li>
           {session == null ? (
             <>
               <li>

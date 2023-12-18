@@ -1,8 +1,13 @@
 import React from "react";
-import BlogList from "./BlogList";
 import { createServerClient, getPageData } from "@/lib/db";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
+import Loading from "@/app/loading";
+
+const DynamicBlogList = dynamic(() => import("./BlogList"), {
+  loading: () => <Loading />,
+});
 
 const page = async () => {
   const supabase = createServerClient();
@@ -22,7 +27,7 @@ const page = async () => {
     return (
       <div className="w-11/12 lg:w-1/2 mx-auto">
         {count >= 1 ? (
-          <BlogList data={data} />
+          <DynamicBlogList data={data} />
         ) : (
           <p className="text-xl">
             {pageData?.my_blogs?.error_message}

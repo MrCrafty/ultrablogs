@@ -9,7 +9,7 @@ const DynamicCategories = dynamic(() => import("./CategoryTabs"), {
 
 const Home = () => {
   return (
-    <div className="container mx-auto mt-5 px-3 lg:p-0">
+    <div className="container mx-auto mt-5 px-3">
       <h2 className="text-3xl lg:text-5xl border-b-2 border-gray-500 p-2">
         Explore Blogs
       </h2>

@@ -39,7 +39,7 @@ const BlogList = () => {
   }, []);
   if (data?.data.length == 0) {
     return (
-      <h2 className="text-3xl">
+      <h2 className="text-xl px-5 md:text-3xl">
         Looks like there are no Blogs written. Take an initiative and{" "}
         <Link href={"/blogs/addblog"} className="text-blue-400">
           Add a Blog
