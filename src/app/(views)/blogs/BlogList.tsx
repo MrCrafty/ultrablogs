@@ -37,7 +37,16 @@ const BlogList = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(data?.data[0]?.categories.includes("SOmething"));
+  if (data?.data.length == 0) {
+    return (
+      <h2 className="text-3xl">
+        Looks like there are no Blogs written. Take an initiative and{" "}
+        <Link href={"/blogs/addblog"} className="text-blue-400">
+          Add a Blog
+        </Link>
+      </h2>
+    );
+  }
   return (
     <AnimatePresence>
       <motion.div className="w-11/12 lg:w-1/2 mx-auto">
