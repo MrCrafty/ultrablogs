@@ -19,7 +19,7 @@ const page = async () => {
     data: { session },
   } = await createServerClient().auth.getSession();
   if (session == null) {
-    return redirect("/");
+    return redirect("/login");
   } else {
     return (
       <>
