@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Loading from "./loading";
 import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,34 @@ const DynamicFooter = dynamic(() => import("../components/Footer"), {
   loading: () => <Loading />,
 });
 
+export const meta: Metadata = {
+  openGraph: {
+    title: "Ultra Blogs",
+    type: "website",
+    url: "https://ultrablogs.in",
+    description:
+      "Education Blogs, with easy to setup Account and start writing blogs within minutes",
+  },
+  keywords: [
+    "ultrablogs",
+    "blogs",
+    "ultra",
+    "technology",
+    "medical",
+    "health",
+    "travel",
+    "trends",
+    "science",
+    "ultrablogs.in",
+    "science",
+    "data",
+    "data science",
+    "india",
+    "react",
+    "next",
+    "supabase",
+  ],
+};
 export default function RootLayout({
   children,
 }: {
@@ -23,19 +52,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-        <meta property="og:title" content="Ultra Blogs" />
-        <meta property="og:type" content="Website" />
-        <meta property="og:URL" content="https://ultrablogs.in" />
-        <meta
-          property="og:description"
-          content="Education Blogs, with easy to setup Account and start writing blogs within minutes"
-        />
-        <meta
-          name="keywords"
-          content="ultrablogs, blogs, ultra, technology, trends, ultrablogs.in, science, iitm, data, science, data science, india, react, next, supabase"
-        />
-      </Head>
       <body className={inter.className + " text-black"}>
         <GoToTopButton />
         <header>
