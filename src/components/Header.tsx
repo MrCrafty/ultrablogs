@@ -11,16 +11,19 @@ const Header = async () => {
   } = await createServerClient().auth.getSession();
 
   return (
-    <div className="border-b-2 border-gray-300 shadow-xl w-full fixed top-0 left-0 bg-white px-5 z-50 py-3">
+    <div className="border-b-2 border-gray-300 shadow-xl w-full fixed top-0 left-0 bg-white bg-opacity-100 px-5 z-50 py-3">
       <div className=" container mx-auto">
-        <div className="lg:text-xl md:hidden">
+        <div className="lg:text-2xl md:hidden">
           <MobileSideBar session={session} />
         </div>
         <div className="justify-between items-center lg:text-xl hidden md:flex ">
-          <ul className="flex gap-3">
+          <ul className="flex gap-5 items-center">
             <li>
-              <Link className="cursor-pointer" href="/">
-                Home
+              <Link
+                className="cursor-pointer font-DanceScript text-4xl"
+                href="/"
+              >
+                UltraBlogs.in
               </Link>
             </li>
             <li>
