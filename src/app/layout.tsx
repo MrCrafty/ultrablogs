@@ -5,6 +5,7 @@ import GoToTopButton from "@/components/GoToTopButton";
 import dynamic from "next/dynamic";
 import Loading from "./loading";
 import { Analytics } from "@vercel/analytics/react";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <meta property="og:title" content="Ultra Blogs" />
+        <meta property="og:type" content="Website" />
+        <meta property="og:URL" content="https://ultrablogs.in" />
+        <meta
+          property="og:description"
+          content="Education Blogs, with easy to setup Account and start writing blogs within minutes"
+        />
+        <meta name="keywords" content="" />
+      </Head>
       <body className={inter.className + " text-black"}>
         <GoToTopButton />
         <header>
