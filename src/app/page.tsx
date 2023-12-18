@@ -3,7 +3,8 @@ import dynamic from "next/dynamic";
 import Loading from "./loading";
 
 export const metadata: Metadata = {
-  title: "Blogsite",
+  title: "UltraBlogs",
+  description: "This is YOUR space",
 };
 
 const DynamicHome = dynamic(() => import("./Home"), {

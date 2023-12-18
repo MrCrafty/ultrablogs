@@ -8,9 +8,11 @@ import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   icons: {
-    icon: "/public/favicon.ico",
+    icon: {
+      href: "/public/Images",
+    },
   },
 };
 
