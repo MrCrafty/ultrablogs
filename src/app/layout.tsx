@@ -35,6 +35,11 @@ export default function RootLayout({
         <footer>
           <DynamicFooter />
         </footer>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6662453239066055"
+          crossOrigin="anonymous"
+        ></script>
       </body>
     </html>
   );
