@@ -20,7 +20,6 @@ const Comments = ({ blog_id, comments }: any) => {
           ?.reverse()
           ?.slice(0, totalComments)
           .map((comment: any, index: number) => {
-            console.log(comment);
             return (
               <motion.div
                 initial={{ x: -100, opacity: 0 }}

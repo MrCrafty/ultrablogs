@@ -38,8 +38,6 @@ const page = async ({ params }: { params: { id: string } }) => {
     .from("user_data")
     .select("*")
     .eq("id", data?.user_id))!.data;
-  console.log(data, "blog-data");
-  metadata.title = data?.data?.title;
   if (data == null) {
     return redirect("/not-found");
   } else {
