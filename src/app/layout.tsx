@@ -4,8 +4,15 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoToTopButton from "@/components/GoToTopButton";
 import dynamic from "next/dynamic";
 import Loading from "./loading";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const metadata: Metadata = {
+  icons: {
+    icon: "/public/favicon.ico",
+  },
+};
 
 const DynamicHeader = dynamic(() => import("../components/Header"), {
   loading: () => <Loading />,
