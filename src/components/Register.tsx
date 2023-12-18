@@ -36,7 +36,6 @@ const Register = () => {
       alert(login?.error?.message);
     };
     const handleRegister = () => {
-      alert("Successfully Registered");
       router.push("/");
       router.refresh();
     };

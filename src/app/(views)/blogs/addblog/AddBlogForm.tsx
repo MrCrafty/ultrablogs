@@ -40,7 +40,6 @@ const AddBlogForm = () => {
   }, []);
   //Handlers
   const handleFormSuccess = () => {
-    alert("Saved Successfully");
     router.push("/blogs");
   };
   const handleCoverImageUpload = async () => {
