@@ -31,7 +31,10 @@ export default function RootLayout({
           property="og:description"
           content="Education Blogs, with easy to setup Account and start writing blogs within minutes"
         />
-        <meta name="keywords" content="" />
+        <meta
+          name="keywords"
+          content="ultrablogs, blogs, ultra, technology, trends, ultrablogs.in, science, iitm, data, science, data science, india, react, next, supabase"
+        />
       </Head>
       <body className={inter.className + " text-black"}>
         <GoToTopButton />
