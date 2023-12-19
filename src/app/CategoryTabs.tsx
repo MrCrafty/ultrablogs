@@ -2,27 +2,45 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-const CategoryTabs = ({ image, title }: { image: string; title: string }) => {
+import { IoArrowForwardOutline } from "react-icons/io5";
+import Link from "next/link";
+
+const CategoryTabs = ({
+  image,
+  title,
+  imageRight = false,
+}: {
+  image: string;
+  title: string;
+  imageRight?: boolean;
+}) => {
   const router = useRouter();
   return (
     <div
-      className="relative aspect-video overflow-hidden cursor-pointer hover:[&>img]:scale-110"
       onClick={() => {
         router.push(`/blogs?category=${title}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }}
+      className={`flex justify-between items-center relative text-black gap-10 group ${
+        imageRight ? "flex-row-reverse" : ""
+      }`}
     >
-      <div className="absolute bg-gradient-to-t from-black to-transparent bottom-0 h-3/4 w-full peer z-10">
-        <h2 className="absolute bottom-10 left-1/2 -translate-x-1/2 text-4xl text-white">
-          {title}
-        </h2>
+      <div className="absolute -z-10 opacity-10 right-0 top-0 w-1 duration-300 transition-all group-hover:w-full h-full bg-gray-500"></div>
+      <div className="w-1/2">
+        <Image
+          alt="Category-Image"
+          src={image}
+          width={5000}
+          height={5000}
+          className="aspect-video w-full object-cover transition-all z-10"
+        />
       </div>
-      <Image
-        alt="Category-Image"
-        src={image}
-        width={5000}
-        height={5000}
-        className="aspect-video w-full object-cover transition-all peer-hover:scale-110 z-0"
-      />
+      <div
+        className={`w-full relative flex pl-28 text-center text-6xl cursor-pointer`}
+      >
+        <h2>{title}</h2>
+        <IoArrowForwardOutline className="opacity-0 group-hover:opacity-100 ml-0 group-hover:ml-10 transition-all" />
+      </div>
     </div>
   );
 };
