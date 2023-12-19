@@ -95,7 +95,7 @@ const AddBlogForm = () => {
             (
               await supabaseClient.auth.getSession()
             ).data?.session?.user?.id
-          }_${d.getTime()}`,
+          }_${d.getTime()}_${Math.random() * 1000000}`,
           file
         );
       var imgPath = supabaseClient.storage
