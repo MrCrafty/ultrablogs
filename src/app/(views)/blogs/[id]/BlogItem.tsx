@@ -1,6 +1,6 @@
 "use client";
 import { BlockNoteEditor } from "@blocknote/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BlockNoteView } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { useRouter } from "next/navigation";

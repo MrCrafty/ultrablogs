@@ -14,10 +14,14 @@ import { useRouter } from "next/navigation";
 import { supabaseClient } from "@/lib/dbClient";
 import { FiLoader } from "react-icons/fi";
 import { motion } from "framer-motion";
-import ImageInput from "./ImageInput";
 import CategoryTab from "./CategoryTab";
+import dynamic from "next/dynamic";
+import Loading from "@/app/loading";
 
 const AddBlogForm = () => {
+  const DynamicImageInput = dynamic(() => import("./ImageInput"), {
+    loading: () => <Loading />,
+  });
   //Variables
   var d = new Date();
   const router = useRouter();
@@ -140,7 +144,7 @@ const AddBlogForm = () => {
         className="flex flex-col gap-3"
       >
         <div className="w-full">
-          <ImageInput
+          <DynamicImageInput
             coverImagePreview={coverImagePreview}
             handleCoverPreview={handleCoverPreview}
           />

@@ -1,12 +1,11 @@
 "use client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const BlogList = () => {
-  const [data, setData] = useState<any>();
+const BlogList = ({ data }: { data: any }) => {
   const query = useSearchParams();
   async function getUserData(id: string) {
     const supabase = createClientComponentClient();
@@ -22,22 +21,7 @@ const BlogList = () => {
       return res.data;
     }
   }
-  async function getData() {
-    const supabase = createClientComponentClient();
-    const res = await supabase
-      .from("data")
-      .select("*")
-      .order("inserted_at", { ascending: false });
-    if (res.error) {
-      return res.error.message;
-    } else {
-      setData(res);
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, []);
-  if (data?.data.length == 0) {
+  if (data?.length == 0) {
     return (
       <h2 className="text-xl px-5 md:text-3xl">
         Looks like there are no Blogs written. Take an initiative and{" "}
@@ -50,7 +34,7 @@ const BlogList = () => {
   return (
     <AnimatePresence>
       <motion.div className="w-11/12 lg:w-1/2 mx-auto">
-        {data?.data
+        {data
           .filter((item: { title: string; categories: string[] }) => {
             if (query.get("q")) {
               return item?.title?.toLowerCase().includes(query.get("q") ?? "");

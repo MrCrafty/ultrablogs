@@ -28,6 +28,7 @@
     "react-loader-spinner": "^5.4.5",
     "react-markdown": "^9.0.1",
     "react-tagsinput": "^3.20.3",
+    "sharp": "^0.33.1",
     "supabase": "^1.112.0"
   },
   "devDependencies": {
