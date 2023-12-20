@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import ImageInput from "./ImageInput";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import "./style.css";
@@ -19,9 +20,7 @@ import dynamic from "next/dynamic";
 import Loading from "@/app/loading";
 
 const AddBlogForm = () => {
-  const DynamicImageInput = dynamic(() => import("./ImageInput"), {
-    loading: () => <Loading />,
-  });
+  
   //Variables
   var d = new Date();
   const router = useRouter();
@@ -144,7 +143,7 @@ const AddBlogForm = () => {
         className="flex flex-col gap-3"
       >
         <div className="w-full">
-          <DynamicImageInput
+          <ImageInput
             coverImagePreview={coverImagePreview}
             handleCoverPreview={handleCoverPreview}
           />
