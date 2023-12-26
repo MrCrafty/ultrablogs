@@ -21,7 +21,27 @@ const BlogList = ({ data }: { data: any }) => {
       return res.data;
     }
   }
-  if (data?.length == 0) {
+  if (
+    data?.filter((item: { title: string; categories: string[] }) => {
+      if (query.get("q")) {
+        return item?.title?.toLowerCase().includes(query.get("q") ?? "");
+      } else if (query.get("category")) {
+        return item?.categories.includes(query.get("category") ?? "");
+      } else {
+        return true;
+      }
+    }).length == 0
+  ) {
+    return (
+      <h2 className="text-xl px-5 md:text-3xl">
+        Looks like there are no Blogs written in this Category. Take an
+        initiative and{" "}
+        <Link href={"/blogs/addblog"} className="text-blue-400">
+          Add a Blog
+        </Link>
+      </h2>
+    );
+  } else if (data?.length == 0) {
     return (
       <h2 className="text-xl px-5 md:text-3xl">
         Looks like there are no Blogs written. Take an initiative and{" "}

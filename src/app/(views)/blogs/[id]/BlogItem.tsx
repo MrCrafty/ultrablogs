@@ -1,6 +1,6 @@
 "use client";
 import { BlockNoteEditor } from "@blocknote/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BlockNoteView } from "@blocknote/react";
 import "@blocknote/core/style.css";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const BlogItem = (data: any) => {
       });
   }
   function handleBack() {
-    router.back();
+    router.push("/blogs");
   }
   return (
     <div className="border-b-2 pb-5">
@@ -52,7 +52,7 @@ const BlogItem = (data: any) => {
       )}
       <div className="border-b-2 py-2">
         <div className="flex justify-between">
-          <h1 className="text-5xl text-text-semibold mb-4">
+          <h1 className="text-3xl lg:text-5xl text-text-semibold mb-4">
             {data?.data?.title}
           </h1>
           <p className="text-gray-300 text-sm min-w-fit">
@@ -77,7 +77,7 @@ const BlogItem = (data: any) => {
           </div>
         </div>
       </div>
-      <BlockNoteView editor={editor} theme={"light"} className="my-10" />
+      <BlockNoteView editor={editor} theme={"light"} className="my-10 " />
       {data?.isEditable ? (
         editable ? (
           <button

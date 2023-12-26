@@ -22,6 +22,7 @@
     "markdown-air": "^0.0.4",
     "md-2-json": "^2.0.0",
     "next": "14.0.3",
+    "next-share": "^0.27.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import CommentBox from "@/components/CommentBox";
 import Comments from "@/components/Comments";
 import { redirect } from "next/navigation";
+import SocialShareButtons from "./SocialShareButtons";
 
 export const metadata: Metadata = {
   description: "Blog Page",
@@ -44,13 +45,14 @@ const page = async ({ params }: { params: { id: string } }) => {
   }
   return (
     <div className="text-black container">
-      <div className="w-11/12 lg:w-1/2 mx-auto">
+      <div className="p-4 lg:p-0 lg:w-3/4 mx-auto">
         <BlogItem
           data={data}
           isEditable={user?.id == data?.user_id}
           //@ts-ignore blogUser possibly "Null"
           user={blogUser[0]}
         />
+        <SocialShareButtons />
         <CommentBox user={user} blog_id={params.id} />
         <h3 className="text-2xl py-3 my-3">Comments</h3>
         <Comments blog_id={params.id} comments={res.data?.comments} />
