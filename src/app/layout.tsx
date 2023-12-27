@@ -5,7 +5,6 @@ import GoToTopButton from "@/components/GoToTopButton";
 import dynamic from "next/dynamic";
 import Loading from "./loading";
 import { Analytics } from "@vercel/analytics/react";
-import Head from "next/head";
 import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });

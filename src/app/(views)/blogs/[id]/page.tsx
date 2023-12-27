@@ -63,16 +63,27 @@ const page = async ({ params }: { params: { id: string } }) => {
 
 export default page;
 
-//Known issue in Nextjs, cookie cannot be accessed inside function other than default
+export const generateStaticParams = async () => {
+  const data = await fetch(
+    (process.env.NEXT_PUBLIC_SUPABASE_URL as string) +
+      "/rest/v1/data?select=id",
+    {
+      method: "GET",
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
+      },
+    }
+  );
+  const res = await data.json();
+  const strId = await res?.map((item: { id: number }) => {
+    return {
+      id: String(item.id),
+    };
+  });
 
-// export const generateStaticParams = async () => {
-//   const blogs = await createServerClient().from("data").select("id");
-//   const blogposts = blogs.data?.map((data) => {
-//     return { id: data.id };
-//   });
-//   if (blogposts !== undefined) {
-//     return blogposts;
-//   } else {
-//     return [];
-//   }
-// };
+  if (res !== undefined) {
+    return strId;
+  } else {
+    return [];
+  }
+};
